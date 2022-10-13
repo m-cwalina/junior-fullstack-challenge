@@ -42,12 +42,26 @@
 
     //Fetch data from the API
     const api = async() => {
-      const URL = '/api/hello/world'
+      const URL = '/api/times'
       try {
         let response = await fetch(URL);
         let data = await response.json();
         setTimes(data);
         console.log(results)
+      } catch(error) {
+        console.error(error)
+      }
+    }
+
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const URL = 'api/times'
+      try {
+        await fetch(URL, {
+          method: "POST",
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({start_time: 'Hello'}),
+        });
       } catch(error) {
         console.error(error)
       }
@@ -91,6 +105,9 @@
       return (
         <div>
           <Progress scroll={scrollPosition + '%'} />
+          <form onSubmit={handleSubmit}>
+            <button>Start Reading</button>
+          </form>
           <div className='title-container'>
             <h1>HTML Ipsum Presents</h1>
           </div>

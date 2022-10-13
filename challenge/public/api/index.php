@@ -16,17 +16,38 @@ $container->set('redisClient', function () {
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 $app->setBasePath('/api');
+$app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
-/**
- * TODO
- * Here you can write your own API endpoints.
- * You can use Redis and/or cookies for data persistence.
- *
- * Find below an example of a GET endpoint that uses redis to temporarily store a name,
- * and cookies to keep track of an event date and time.
- */
+$app->post('/times', function (Request $request, Response $response) {
+    $data = $request->getParsedBody();
+
+    // Redis usage example:
+    /** @var \Predis\Client $redisClient */
+    $redisClient = $this->get('redisClient');
+    $oldName = $redisClient->get('data');
+    if (is_string($oldName)) {
+        $data = $oldName;
+    } else {
+        $redisClient->set('start_time', $data, 'EX', 10);
+        $data = $data;
+    }
+
+    $response->getBody()->write(json_encode([$data], JSON_THROW_ON_ERROR));
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+$app->get('/times', function (Request $request, Response $response) {
+
+
+
+    $response->getBody()->write(json_encode([
+      $data
+    ], JSON_THROW_ON_ERROR));
+
+    return $response->withHeader('Content-Type', 'application/json');
+});
 
 $app->get('/hello/{name}', function (Request $request, Response $response, $args) {
 
