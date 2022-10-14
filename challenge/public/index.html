@@ -6,9 +6,16 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script crossorigin src="//unpkg.com/react-is/umd/react-is.production.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/styled-components/5.3.6/styled-components.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
       body {
-        background-color: #FFFFFF;
+        background-color:#161B22;
+        color: #FFFFFF;
+        font-family: 'Roboto', sans-serif;
       }
       .title-container {
         display: flex;
@@ -17,6 +24,23 @@
       .content-container {
         margin-left: 150px;
         margin-right: 150px;
+      }
+      .header-container {
+        display: flex;
+        justify-content: center;
+      }
+      h1 {
+        font-size: 130px;
+      }
+      h2 {
+        font-size: 100px;
+      }
+      p {
+        font-size: 40px;
+      }
+      .reading-time {
+        display: flex;
+        justify-content: center;
       }
     </style>
 </head>
@@ -60,7 +84,7 @@
         await fetch(URL, {
           method: "POST",
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({start_time: 'Hello'}),
+          body: {start_time: Date.now()},
         });
       } catch(error) {
         console.error(error)
@@ -105,13 +129,14 @@
       return (
         <div>
           <Progress scroll={scrollPosition + '%'} />
-          <form onSubmit={handleSubmit}>
-            <button>Start Reading</button>
-          </form>
           <div className='title-container'>
+            <form onSubmit={handleSubmit}>
+              <button type="button" className="btn btn-outline-light">Start Reading</button>
+            </form>
             <h1>HTML Ipsum Presents</h1>
           </div>
           <div className='content-container'>
+            <hr></hr>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus
                 diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus
                 sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. </p>
@@ -209,9 +234,10 @@
                 lacinia sollicitudin massa. <i>Vestibulum sapien</i>. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi
                 mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante.
                 <i>Morbi in ipsum sit amet pede facilisis laoreet</i>. Nulla quam. Aenean laoreet. </p>
-
-            <h2>Header Level 2</h2>
-
+            <div className="header-container">
+              <h2>Header Level 2</h2>
+            </div>
+            <hr></hr>
             <p><b>Integer lacinia sollicitudin massa</b>. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut
                 orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. <b>Integer id quam</b>. Sed pretium blandit orci.
                 Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. Nullam
@@ -283,9 +309,19 @@
                     ullamcorper vel, tincidunt sed, euismod in, nibh</i>. Morbi in dui quis est pulvinar ullamcorper. Nulla
                 facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi.
                 Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. </p>
-          </div>
-          <div className="reading-time">
-            <p>{times.name}</p>
+            <div className="reading-time">
+              {(() => {
+                if (' ') {
+                  return (
+                    <p>Need to push button to start</p>
+                  )
+                } else {
+                  return (
+                    <p>{times}</p>
+                  )
+                }
+              })()}
+            </div>
           </div>
         </div>
       )

@@ -21,32 +21,27 @@ $app->addRoutingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 $app->post('/times', function (Request $request, Response $response) {
+
     $data = $request->getParsedBody();
 
-    // Redis usage example:
-    /** @var \Predis\Client $redisClient */
     $redisClient = $this->get('redisClient');
-    $oldName = $redisClient->get('data');
-    if (is_string($oldName)) {
-        $data = $oldName;
-    } else {
-        $redisClient->set('start_time', $data, 'EX', 10);
-        $data = $data;
-    }
+    $redisClient->set('start_time', json_encode($data), 'EX', 10);
 
     $response->getBody()->write(json_encode([$data], JSON_THROW_ON_ERROR));
+
     return $response->withHeader('Content-Type', 'application/json');
+
 });
 
 $app->get('/times', function (Request $request, Response $response) {
 
+    $redisClient = $this->get('redisClient');
+    $start_time = $redisClient->get('start_time');
 
-
-    $response->getBody()->write(json_encode([
-      $data
-    ], JSON_THROW_ON_ERROR));
+    $response->getBody()->write(json_encode($start_time, JSON_THROW_ON_ERROR));
 
     return $response->withHeader('Content-Type', 'application/json');
+
 });
 
 $app->get('/hello/{name}', function (Request $request, Response $response, $args) {
