@@ -20,7 +20,7 @@ $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
-$app->post('/times', function (Request $request, Response $response) {
+$app->post('/starttime', function (Request $request, Response $response) {
     //Retrieving that body from the post URL
     $data = $request->getParsedBody();
 
@@ -29,7 +29,7 @@ $app->post('/times', function (Request $request, Response $response) {
     if (is_string($data)) {
       $start_time = $data;
     } else {
-        $redisClient->set('start_time', json_encode($data), 'EX', 20);
+        $redisClient->set('start_time', json_encode($data), 'EX', 1000);
         $start_time = $data;
     }
 
@@ -40,12 +40,13 @@ $app->post('/times', function (Request $request, Response $response) {
 
 });
 
-$app->get('/times', function (Request $request, Response $response, $args) {
+$app->get('/starttime', function (Request $request, Response $response, $args) {
 
     //Retrieving data from our redis cache
     $redisClient = $this->get('redisClient');
-    $start_time = $redisClient->get('start_time');
-
+    $results = $redisClient->get('start_time');
+    //Need this to turn JSON into string so I can encode the JSON again in the write() function
+    $start_time = (json_decode($results));
     //Deliever a response with the start_time in JSON
     $response->getBody()->write(json_encode($start_time, JSON_THROW_ON_ERROR));
 
@@ -53,7 +54,7 @@ $app->get('/times', function (Request $request, Response $response, $args) {
 
 });
 
-$app->post('/endtimes', function (Request $request, Response $response) {
+$app->post('/endtime', function (Request $request, Response $response) {
     //Retrieving that body from the post URL
     $data = $request->getParsedBody();
 
@@ -62,7 +63,7 @@ $app->post('/endtimes', function (Request $request, Response $response) {
     if (is_string($data)) {
       $end_time = $data;
     } else {
-        $redisClient->set('end_time', json_encode($data), 'EX', 20);
+        $redisClient->set('end_time', json_encode($data), 'EX', 1000);
         $end_time = $data;
     }
 
@@ -73,12 +74,26 @@ $app->post('/endtimes', function (Request $request, Response $response) {
 
 });
 
-$app->get('/endtimes', function (Request $request, Response $response, $args) {
+$app->get('/endtime', function (Request $request, Response $response, $args) {
 
     //Retrieving data from our redis cache
     $redisClient = $this->get('redisClient');
-    $end_time = $redisClient->get('end_time');
+    $results = $redisClient->get('end_time');
+    $end_time = (json_decode($results));
+    //Deliever a response with the start_time in JSON
+    $response->getBody()->write(json_encode($end_time, JSON_THROW_ON_ERROR));
 
+    return $response->withHeader('Content-Type', 'application/json');
+
+});
+
+$app->get('/totaltime', function (Request $request, Response $response, $args) {
+
+    //Retrieving data from our redis cache
+    $redisClient = $this->get('redisClient');
+    $start_time = $redisClient->get('start_time');
+    $end_time = $redisClient->get('end_time');
+    $end_time = (json_decode($results));
     //Deliever a response with the start_time in JSON
     $response->getBody()->write(json_encode($end_time, JSON_THROW_ON_ERROR));
 

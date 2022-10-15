@@ -50,7 +50,7 @@
 <div id="root"></div>
 
 <script  type="text/babel">
-  const { useState, useEffect } = React
+  const { useState, useEffect, useRef } = React
   const Progress = styled.div`
     position:  fixed;
     background:  linear-gradient( to right, rgba(128, 0, 128, .8) ${props => props.scroll}, transparent  0);
@@ -67,12 +67,12 @@
 
   //Post data to API
   const postApi = async() => {
-    const URL = 'api/times'
+    const URL = 'api/starttime'
     try {
       await fetch(URL, {
         method: "POST",
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ start_time: Date.now() }),
+        body: JSON.stringify({ start_time: new Date().toLocaleTimeString('en-SG',{ timeZone: 'Asia/Singapore',hour12: true})}),
         });
     } catch (error) {
       console.error(error)
@@ -81,12 +81,12 @@
 
     //Post data to API for end_time
     const postApi2 = async () => {
-      const URL = 'api/endtimes'
+      const URL = 'api/endtime'
       try {
         await fetch(URL, {
           method: "POST",
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({ end_time: Date.now() }),
+          body: JSON.stringify({ end_time: new Date().toLocaleTimeString('en-SG', { timeZone: 'Asia/Singapore',hour12: true })}),
         });
       } catch (error) {
         console.error(error)
@@ -95,7 +95,7 @@
 
     //Fetch data from the API for start_time
     const api = async () => {
-      const URL = '/api/times'
+      const URL = '/api/starttime'
       try {
         let response = await fetch(URL);
         let data = await response.json();
@@ -107,7 +107,7 @@
 
     //Fetch data from the API for end_time
     const api2 = async () => {
-      const URL = '/api/endtimes'
+      const URL = '/api/endtime'
       try {
         let response = await fetch(URL);
         let data = await response.json();
@@ -117,25 +117,25 @@
       }
     }
 
-    const handleSubmit = async event => {
-      event.preventDefault()
-      postApi2()
-      api2()
-    }
+    useEffect(() => {
+      function handleScrollEvent() {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+          postApi2();
+          api2();
+        }
+      }
+      window.addEventListener('scroll', handleScrollEvent)
+      return () => {
+        window.removeEventListener('scroll', handleScrollEvent);
+      }
+    }, [])
 
     // Calls the event listener and api after render
     useEffect(() => {
-      api();
-    }, [startTime]);
-
-    useEffect(() => {
       listenToScrollEvent();
+      api();
       postApi();
     }, []);
-
-    useEffect(() => {
-      handleSubmit(event)
-    }, [endTime]);
 
     //Find the height of the document
     const getDocHeight = () => {
@@ -345,14 +345,15 @@
                     ullamcorper vel, tincidunt sed, euismod in, nibh</i>. Morbi in dui quis est pulvinar ullamcorper. Nulla
                 facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi.
                 Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. </p>
-              <form onSubmit={handleSubmit}>
-                <button>Finish Reading</button>
-              </form>
-            <div className="reading-time">
-              <p>{startTime}</p>
-              <p>{endTime}</p>
             </div>
-          </div>
+
+            <div className="reading-time">
+              <ul>
+                <li>start time: {startTime.start_time}</li>
+                <li>end time: {endTime.end_time}</li>
+              </ul>
+            </div>
+
         </div>
       )
   }
