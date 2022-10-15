@@ -62,25 +62,14 @@
 
   const App = () => {
     const [scrollPosition, setScrollPosition] = React.useState(0);
-    const [times, setTimes] = React.useState([]);
-
-  //Fetch data from the API
-  const api = async() => {
-    const URL = '/api/times'
-      try {
-        let response = await fetch(URL);
-        let data = await response.json();
-        setTimes(data);
-      } catch(error) {
-        console.error(error)
-      }
-  }
+    const [startTime, setStartTime] = React.useState([]);
+    const [endTime, setEndTime] = React.useState([]);
 
   //Post data to API
   const postApi = async() => {
     const URL = 'api/times'
     try {
-      const data = await fetch(URL, {
+      await fetch(URL, {
         method: "POST",
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({ start_time: Date.now() }),
@@ -90,6 +79,63 @@
     }
   }
 
+    //Post data to API for end_time
+    const postApi2 = async () => {
+      const URL = 'api/endtimes'
+      try {
+        await fetch(URL, {
+          method: "POST",
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({ end_time: Date.now() }),
+        });
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    //Fetch data from the API for start_time
+    const api = async () => {
+      const URL = '/api/times'
+      try {
+        let response = await fetch(URL);
+        let data = await response.json();
+        setStartTime(data);
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    //Fetch data from the API for end_time
+    const api2 = async () => {
+      const URL = '/api/endtimes'
+      try {
+        let response = await fetch(URL);
+        let data = await response.json();
+        setEndTime(data);
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    const handleSubmit = async event => {
+      event.preventDefault()
+      postApi2()
+      api2()
+    }
+
+    // Calls the event listener and api after render
+    useEffect(() => {
+      api();
+    }, [startTime]);
+
+    useEffect(() => {
+      listenToScrollEvent();
+      postApi();
+    }, []);
+
+    useEffect(() => {
+      handleSubmit(event)
+    }, [endTime]);
 
     //Find the height of the document
     const getDocHeight = () => {
@@ -119,17 +165,9 @@
       });
     };
 
-    // Calls the event listener and api after render
-    useEffect(() => {
-      listenToScrollEvent();
-      postApi();
-      api();
-    }, []);
-
       return (
         <div>
           <Progress scroll={scrollPosition + '%'} />
-
           <div className='title-container'>
             <h1>HTML Ipsum Presents</h1>
           </div>
@@ -307,8 +345,12 @@
                     ullamcorper vel, tincidunt sed, euismod in, nibh</i>. Morbi in dui quis est pulvinar ullamcorper. Nulla
                 facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi.
                 Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. </p>
+              <form onSubmit={handleSubmit}>
+                <button>Finish Reading</button>
+              </form>
             <div className="reading-time">
-              <p>{times}</p>
+              <p>{startTime}</p>
+              <p>{endTime}</p>
             </div>
           </div>
         </div>

@@ -53,4 +53,37 @@ $app->get('/times', function (Request $request, Response $response, $args) {
 
 });
 
+$app->post('/endtimes', function (Request $request, Response $response) {
+    //Retrieving that body from the post URL
+    $data = $request->getParsedBody();
+
+    //Using redis to cache the $data (simulating inserting data into DB)
+    $redisClient = $this->get('redisClient');
+    if (is_string($data)) {
+      $end_time = $data;
+    } else {
+        $redisClient->set('end_time', json_encode($data), 'EX', 20);
+        $end_time = $data;
+    }
+
+    //Taking the response and producing JSON
+    $response->getBody()->write(json_encode($data, JSON_THROW_ON_ERROR));
+
+    return $response->withHeader('Content-Type', 'application/json');
+
+});
+
+$app->get('/endtimes', function (Request $request, Response $response, $args) {
+
+    //Retrieving data from our redis cache
+    $redisClient = $this->get('redisClient');
+    $end_time = $redisClient->get('end_time');
+
+    //Deliever a response with the start_time in JSON
+    $response->getBody()->write(json_encode($end_time, JSON_THROW_ON_ERROR));
+
+    return $response->withHeader('Content-Type', 'application/json');
+
+});
+
 $app->run();
