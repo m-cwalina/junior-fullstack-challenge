@@ -21,59 +21,36 @@ $app->addRoutingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 
 $app->post('/times', function (Request $request, Response $response) {
-
+    //Retrieving that body from the post URL
     $data = $request->getParsedBody();
 
+    //Using redis to cache the $data (simulating inserting data into DB)
     $redisClient = $this->get('redisClient');
-    $redisClient->set('start_time', json_encode($data), 'EX', 10);
+    if (is_string($data)) {
+      $start_time = $data;
+    } else {
+        $redisClient->set('start_time', json_encode($data), 'EX', 20);
+        $start_time = $data;
+    }
 
-    $response->getBody()->write(json_encode([$data], JSON_THROW_ON_ERROR));
+    //Taking the response and producing JSON
+    $response->getBody()->write(json_encode($data, JSON_THROW_ON_ERROR));
 
     return $response->withHeader('Content-Type', 'application/json');
 
 });
 
-$app->get('/times', function (Request $request, Response $response) {
+$app->get('/times', function (Request $request, Response $response, $args) {
 
+    //Retrieving data from our redis cache
     $redisClient = $this->get('redisClient');
     $start_time = $redisClient->get('start_time');
 
+    //Deliever a response with the start_time in JSON
     $response->getBody()->write(json_encode($start_time, JSON_THROW_ON_ERROR));
 
     return $response->withHeader('Content-Type', 'application/json');
 
-});
-
-$app->get('/hello/{name}', function (Request $request, Response $response, $args) {
-
-    // Redis usage example:
-    /** @var \Predis\Client $redisClient */
-    $redisClient = $this->get('redisClient');
-    $oldName = $redisClient->get('name');
-    if (is_string($oldName)) {
-        $name = $oldName;
-    } else {
-        $redisClient->set('name', $args['name'], 'EX', 10);
-        $name = $args['name'];
-    }
-
-    // Setting a cookie example:
-    $cookieValue = '';
-    if (empty($_COOKIE["FirstSalutationTime"])) {
-        $cookieName = "FirstSalutationTime";
-        $cookieValue = (string)time();
-        $expires = time() + 60 * 60 * 24 * 30; // 30 days.
-        setcookie($cookieName, $cookieValue, $expires, '/');
-    }
-
-    // Response example:
-    $response->getBody()->write(json_encode([
-        'name' => $name,
-        'salutation' => "Hello, $name!",
-        'first_salutation_time' => $_COOKIE["FirstSalutationTime"] ?? $cookieValue,
-    ], JSON_THROW_ON_ERROR));
-
-    return $response->withHeader('Content-Type', 'application/json');
 });
 
 $app->run();

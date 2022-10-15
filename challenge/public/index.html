@@ -64,32 +64,31 @@
     const [scrollPosition, setScrollPosition] = React.useState(0);
     const [times, setTimes] = React.useState([]);
 
-    //Fetch data from the API
-    const api = async() => {
-      const URL = '/api/times'
+  //Fetch data from the API
+  const api = async() => {
+    const URL = '/api/times'
       try {
         let response = await fetch(URL);
         let data = await response.json();
         setTimes(data);
-        console.log(results)
       } catch(error) {
         console.error(error)
       }
-    }
+  }
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const URL = 'api/times'
-      try {
-        await fetch(URL, {
-          method: "POST",
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: {start_time: Date.now()},
+  //Post data to API
+  const postApi = async() => {
+    const URL = 'api/times'
+    try {
+      const data = await fetch(URL, {
+        method: "POST",
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ start_time: Date.now() }),
         });
-      } catch(error) {
-        console.error(error)
-      }
+    } catch (error) {
+      console.error(error)
     }
+  }
 
 
     //Find the height of the document
@@ -122,17 +121,16 @@
 
     // Calls the event listener and api after render
     useEffect(() => {
-      listenToScrollEvent(),
-      api()
+      listenToScrollEvent();
+      postApi();
+      api();
     }, []);
 
       return (
         <div>
           <Progress scroll={scrollPosition + '%'} />
+
           <div className='title-container'>
-            <form onSubmit={handleSubmit}>
-              <button type="button" className="btn btn-outline-light">Start Reading</button>
-            </form>
             <h1>HTML Ipsum Presents</h1>
           </div>
           <div className='content-container'>
@@ -310,17 +308,7 @@
                 facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi.
                 Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. </p>
             <div className="reading-time">
-              {(() => {
-                if (' ') {
-                  return (
-                    <p>Need to push button to start</p>
-                  )
-                } else {
-                  return (
-                    <p>{times}</p>
-                  )
-                }
-              })()}
+              <p>{times}</p>
             </div>
           </div>
         </div>
