@@ -41,6 +41,8 @@
       .reading-time {
         display: flex;
         justify-content: center;
+        margin-bottom: 200px;
+        margin-top: 200px;
       }
     </style>
 </head>
@@ -64,6 +66,7 @@
     const [scrollPosition, setScrollPosition] = React.useState(0);
     const [startTime, setStartTime] = React.useState([]);
     const [endTime, setEndTime] = React.useState([]);
+    const [totalTime, setTotalTime] = React.useState([]);
 
   //Post data to API
   const postApi = async() => {
@@ -99,11 +102,12 @@
       try {
         let response = await fetch(URL);
         let data = await response.json();
-        setStartTime(data);
+        console.log(data)
+        return setStartTime(data);
       } catch (error) {
-        console.error(error)
+          console.error(error)
       }
-    }
+    };
 
     //Fetch data from the API for end_time
     const api2 = async () => {
@@ -111,17 +115,31 @@
       try {
         let response = await fetch(URL);
         let data = await response.json();
-        setEndTime(data);
+        return setEndTime(data);
+      } catch (error) {
+          console.error(error)
+      }
+    }
+
+    //Fetch data from the API for end_time
+    const api3 = async () => {
+      const URL = '/api/totaltime'
+      try {
+        let response = await fetch(URL);
+        let data = await response.json();
+        return setTotalTime(data);
       } catch (error) {
         console.error(error)
       }
     }
+
 
     useEffect(() => {
       function handleScrollEvent() {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
           postApi2();
           api2();
+          api3();
         }
       }
       window.addEventListener('scroll', handleScrollEvent)
@@ -130,11 +148,16 @@
       }
     }, [])
 
+    useEffect(() => {
+      window.onload = () => {
+        postApi();
+        api();
+      };
+    }, [])
+
     // Calls the event listener and api after render
     useEffect(() => {
       listenToScrollEvent();
-      api();
-      postApi();
     }, []);
 
     //Find the height of the document
@@ -348,12 +371,10 @@
             </div>
 
             <div className="reading-time">
-              <ul>
-                <li>start time: {startTime.start_time}</li>
-                <li>end time: {endTime.end_time}</li>
-              </ul>
+              {(startTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>start time: {startTime.start_time}</p></li></ul>)}
+              {(endTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>end time: {endTime.end_time}</p></li></ul>)}
+              {(totalTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>total time: {totalTime.total_time}</p></li></ul>)}
             </div>
-
         </div>
       )
   }
