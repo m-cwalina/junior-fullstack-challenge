@@ -50,15 +50,7 @@ $app->get('/starttime', function (Request $request, Response $response) {
     $redisClient = $this->get('redisClient');
     $results = $redisClient->get('start_time');
 
-    /*Set a new cookie
-    $cookieValue = '';
-    if (empty($_COOKIE["Expiration"])) {
-        $cookieName = "Expiration";
-        $cookieValue = (string)time();
-        $expires = time() + 60 * 60 * 24 * 30; // 30 days.
-        setcookie($cookieName, $cookieValue, $expires, '/');
-    }
-
+    /*
     //Converting start_time into an integer
     $json = (json_decode($results));
     $string_start_time = $json->start_time;
@@ -72,10 +64,10 @@ $app->get('/starttime', function (Request $request, Response $response) {
     if ($start_time < $expiration_time) {
       $final_time = json_decode($results);
     } else {
-      $start_time_getter = $redisClient->set('start_time', json_encode(["start_time" => $string_start_time, 'expiration_time' => $_COOKIE["Expiration"] ?? $cookieValue,], JSON_THROW_ON_ERROR), 'EX', 100);
-      $final_time = json_decode($start_time_getter);
-    }*/
-
+      $start_time_getter = $redisClient->set(json_encode(["start_time" => $string_start_time, 'expiration_time' => $_COOKIE["Expiration"] ?? $cookieValue,], JSON_THROW_ON_ERROR), 'EX', 100);
+      $final_time = $start_time_getter;
+    }
+    */
 
     //Need this to turn JSON into string so I can encode the JSON again in the write() function
     $start_time = (json_decode($results));
