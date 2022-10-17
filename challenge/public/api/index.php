@@ -26,12 +26,8 @@ $app->post('/starttime', function (Request $request, Response $response) {
 
     //Using redis to cache the $data (simulating inserting data into DB)
     $redisClient = $this->get('redisClient');
-    if (is_string($data)) {
-      $start_time = $data;
-    } else {
-        $redisClient->set('start_time', json_encode($data));
-        $start_time = $data;
-    }
+    $redisClient->set('start_time', json_encode($data), 'EX', 100);
+
 
     //Taking the response and producing JSON
     $response->getBody()->write(json_encode($data, JSON_THROW_ON_ERROR));
@@ -45,8 +41,18 @@ $app->get('/starttime', function (Request $request, Response $response) {
     //Retrieving data from our redis cache
     $redisClient = $this->get('redisClient');
     $results = $redisClient->get('start_time');
+
+    $cookieValue = '';
+    if (empty($_COOKIE["expiration"])) {
+        $cookieName = "Expiration";
+        $cookieValue = (string)time();
+        $expires = time() + 60 * 60 * 24 * 30; // 30 days.
+        setcookie($cookieName, $cookieValue, $expires, '/');
+    }
+
     //Need this to turn JSON into string so I can encode the JSON again in the write() function
     $start_time = (json_decode($results));
+
     //Deliever a response with the start_time in JSON
     $response->getBody()->write(json_encode($start_time, JSON_THROW_ON_ERROR));
 
@@ -60,12 +66,9 @@ $app->post('/endtime', function (Request $request, Response $response) {
 
     //Using redis to cache the $data (simulating inserting data into DB)
     $redisClient = $this->get('redisClient');
-    if (is_string($data)) {
-      $end_time = $data;
-    } else {
-        $redisClient->set('end_time', json_encode($data), 'EX', 100);
-        $end_time = $data;
-    }
+    $redisClient->set('end_time', json_encode($data), 'EX', 100);
+
+
 
     //Taking the response and producing JSON
     $response->getBody()->write(json_encode($data, JSON_THROW_ON_ERROR));
@@ -106,7 +109,7 @@ $app->get('/totaltime', function (Request $request, Response $response, $args) {
 
 
     //Calculating total time by subtracting integers and converting back into string
-    $total_time = date("H:i:s", ($timestamp2-$timestamp));
+    $total_time = date("H:i:s", ($timestamp2 - $timestamp));
 
     //Deliever a response with the start_time in JSON
     $response->getBody()->write(json_encode(['total_time' => $total_time], JSON_THROW_ON_ERROR));

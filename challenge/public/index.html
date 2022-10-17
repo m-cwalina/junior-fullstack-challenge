@@ -90,7 +90,7 @@
 <div id="root"></div>
 
 <script  type="text/babel">
-  const { useState, useEffect, useRef } = React
+  const { useState, useEffect, useRef, createRoot } = React
   const Progress = styled.div`
     position:  fixed;
     background:  linear-gradient( to right, rgba(128, 0, 128, .8) ${props => props.scroll}, transparent  0);
@@ -106,8 +106,8 @@
     const [endTime, setEndTime] = React.useState([]);
     const [totalTime, setTotalTime] = React.useState([]);
 
-  //Post data to API for start_time
-  const postApi = async() => {
+  //Post and Fetch data to API for start_time
+  const startApi = async() => {
     const URL = 'api/starttime'
     try {
       await fetch(URL, {
@@ -115,13 +115,17 @@
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({ start_time: new Date().toLocaleTimeString('en-SG',{ timeZone: 'Asia/Singapore',hour12: true})}),
         });
+      const response = await fetch(URL);
+      const data = await response.json();
+      console.log(data);
+        return setStartTime(data);
     } catch (error) {
       console.error(error)
     }
   }
 
-    //Post data to API for end_time
-    const postApi2 = async () => {
+    //Post and Fetch data to API for end_time
+    const endApi = async () => {
       const URL = 'api/endtime'
       try {
         await fetch(URL, {
@@ -129,13 +133,17 @@
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
           body: JSON.stringify({ end_time: new Date().toLocaleTimeString('en-SG', { timeZone: 'Asia/Singapore',hour12: true })}),
         });
+        const response = await fetch(URL);
+        const data = await response.json();
+        console.log(data)
+          return setEndTime(data);
       } catch (error) {
         console.error(error)
       }
     }
 
     //Fetch data from the API for start_time
-    const api = async () => {
+    /* const api = async () => {
       const URL = '/api/starttime'
       try {
         let response = await fetch(URL);
@@ -145,10 +153,10 @@
       } catch (error) {
           console.error(error)
       }
-    };
+    };*/
 
     //Fetch data from the API for end_time
-    const api2 = async () => {
+    /*const api2 = async () => {
       const URL = '/api/endtime'
       try {
         let response = await fetch(URL);
@@ -157,10 +165,10 @@
       } catch (error) {
           console.error(error)
       }
-    }
+    }*/
 
-    //Fetch data from the API for total_tim
-    const api3 = async () => {
+    //Fetch data from the API for total_time
+    const totalApi = async () => {
       const URL = '/api/totaltime'
       try {
         let response = await fetch(URL);
@@ -175,9 +183,8 @@
     useEffect(() => {
       function handleScrollEvent() {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-          postApi2();
-          api2();
-          api3();
+          endApi();
+          totalApi();
         }
       }
       window.addEventListener('scroll', handleScrollEvent)
@@ -186,17 +193,17 @@
       }
     }, [])
 
-    //On page load post into the api starting time and fetch it
-    useEffect(() => {
+    //On page load post and fetch into the startApi for start_time
+    /* useEffect(() => {
       window.onload = () => {
-        postApi();
-        api();
+        startApi();
       };
-    }, [])
+    }, [])*/
 
     // Listen to the scroll to display the progress bar
     useEffect(() => {
       listenToScrollEvent();
+      startApi();
     }, []);
 
     //Find the height of the document
@@ -234,7 +241,7 @@
           <div className="navbar-logo">
             <img className='logo-image' src='https://m.media-amazon.com/images/S/abs-image-upload-na/5/AmazonStores/A1PA6795UKMFR9/5d119907dc93102ed65366c89fdd1731.w800.h800.png'></img>
           </div>
-          <div class="navbar-links">
+          <div className="navbar-links">
             <a>Home</a>
             <a>About</a>
             <a>News</a>
@@ -427,6 +434,7 @@
       )
   }
 
+  const container = document.getElementById('app');
   const rootElement = document.getElementById('root')
   ReactDOM.render(<App />, rootElement)
 
