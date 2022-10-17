@@ -13,36 +13,74 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
       body {
-        background-color:#161B22;
-        color: #FFFFFF;
+        background-color:#FFFFFF;
+        color:#161B22;
         font-family: 'Roboto', sans-serif;
       }
       .title-container {
         display: flex;
         justify-content: center;
+        margin: 100px;
       }
       .content-container {
         margin-left: 150px;
         margin-right: 150px;
+        text-align: justify;
+        padding: 15px;
+        border-left: 1px solid gray;
+        border-top: 1px solid gray;
       }
       .header-container {
         display: flex;
         justify-content: center;
+        border-bottom: 1px solid gray;
+        margin: 50px;
       }
       h1 {
-        font-size: 130px;
+        font-size: 65px;
+        font-weight: 1000;
       }
       h2 {
-        font-size: 100px;
+        font-size: 60px;
       }
       p {
-        font-size: 40px;
+        font-size: 20px;
+      }
+      ul {
+        margin: auto;
       }
       .reading-time {
         display: flex;
         justify-content: center;
-        margin-bottom: 200px;
-        margin-top: 200px;
+        margin: 150px;
+        border-bottom: 1px solid gray;
+      }
+      .reading-time p {
+        font-size: 30px
+      }
+      .navbar {
+        background-color: #FFFFFF;
+        overflow: hidden;
+        display: flex;
+        border-bottom: 1px solid gray;
+      }
+      .navbar-links {
+        justify-content: end;
+      }
+      .navbar a {
+        float: left;
+        color: #666666;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 18px;
+      }
+      .navbar-logo {
+        margin-left: 10px;
+      }
+      .logo-image {
+        height: 110px;
+        width: 110px;
       }
     </style>
 </head>
@@ -68,7 +106,7 @@
     const [endTime, setEndTime] = React.useState([]);
     const [totalTime, setTotalTime] = React.useState([]);
 
-  //Post data to API
+  //Post data to API for start_time
   const postApi = async() => {
     const URL = 'api/starttime'
     try {
@@ -121,7 +159,7 @@
       }
     }
 
-    //Fetch data from the API for end_time
+    //Fetch data from the API for total_tim
     const api3 = async () => {
       const URL = '/api/totaltime'
       try {
@@ -133,7 +171,7 @@
       }
     }
 
-
+    //Listen to the page scrolling. Once it hits bottom post into api the end time, fetch it and fetch the total time
     useEffect(() => {
       function handleScrollEvent() {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
@@ -148,6 +186,7 @@
       }
     }, [])
 
+    //On page load post into the api starting time and fetch it
     useEffect(() => {
       window.onload = () => {
         postApi();
@@ -155,7 +194,7 @@
       };
     }, [])
 
-    // Calls the event listener and api after render
+    // Listen to the scroll to display the progress bar
     useEffect(() => {
       listenToScrollEvent();
     }, []);
@@ -188,14 +227,24 @@
       });
     };
 
-      return (
+    return (
         <div>
           <Progress scroll={scrollPosition + '%'} />
+        <div className="navbar">
+          <div className="navbar-logo">
+            <img className='logo-image' src='https://m.media-amazon.com/images/S/abs-image-upload-na/5/AmazonStores/A1PA6795UKMFR9/5d119907dc93102ed65366c89fdd1731.w800.h800.png'></img>
+          </div>
+          <div class="navbar-links">
+            <a>Home</a>
+            <a>About</a>
+            <a>News</a>
+            <a>Contact</a>
+          </div>
+        </div>
           <div className='title-container'>
             <h1>HTML Ipsum Presents</h1>
           </div>
           <div className='content-container'>
-            <hr></hr>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus
                 diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus
                 sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. </p>
@@ -296,7 +345,6 @@
             <div className="header-container">
               <h2>Header Level 2</h2>
             </div>
-            <hr></hr>
             <p><b>Integer lacinia sollicitudin massa</b>. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut
                 orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. <b>Integer id quam</b>. Sed pretium blandit orci.
                 Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. Nullam
@@ -368,13 +416,13 @@
                     ullamcorper vel, tincidunt sed, euismod in, nibh</i>. Morbi in dui quis est pulvinar ullamcorper. Nulla
                 facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi.
                 Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. </p>
-            </div>
+          </div>
 
-            <div className="reading-time">
-              {(startTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>start time: {startTime.start_time}</p></li></ul>)}
-              {(endTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>end time: {endTime.end_time}</p></li></ul>)}
-              {(totalTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>total time: {totalTime.total_time}</p></li></ul>)}
-            </div>
+          <div className="reading-time">
+            {(startTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>Start Time: {startTime.start_time}</p></li></ul>)}
+            {(endTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>End Time: {endTime.end_time}</p></li></ul>)}
+            {(totalTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>Total Time: {totalTime.total_time}</p></li></ul>)}
+          </div>
         </div>
       )
   }
