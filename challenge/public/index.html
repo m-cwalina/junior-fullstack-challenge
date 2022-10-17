@@ -142,31 +142,6 @@
       }
     }
 
-    //Fetch data from the API for start_time
-    /* const api = async () => {
-      const URL = '/api/starttime'
-      try {
-        let response = await fetch(URL);
-        let data = await response.json();
-        console.log(data)
-        return setStartTime(data);
-      } catch (error) {
-          console.error(error)
-      }
-    };*/
-
-    //Fetch data from the API for end_time
-    /*const api2 = async () => {
-      const URL = '/api/endtime'
-      try {
-        let response = await fetch(URL);
-        let data = await response.json();
-        return setEndTime(data);
-      } catch (error) {
-          console.error(error)
-      }
-    }*/
-
     //Fetch data from the API for total_time
     const totalApi = async () => {
       const URL = '/api/totaltime'
@@ -192,13 +167,6 @@
         window.removeEventListener('scroll', handleScrollEvent);
       }
     }, [])
-
-    //On page load post and fetch into the startApi for start_time
-    /* useEffect(() => {
-      window.onload = () => {
-        startApi();
-      };
-    }, [])*/
 
     // Listen to the scroll to display the progress bar
     useEffect(() => {
@@ -434,7 +402,6 @@
       )
   }
 
-  const container = document.getElementById('app');
   const rootElement = document.getElementById('root')
   ReactDOM.render(<App />, rootElement)
 
