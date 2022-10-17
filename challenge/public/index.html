@@ -4,7 +4,6 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script crossorigin src="//unpkg.com/react-is/umd/react-is.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/styled-components/5.3.6/styled-components.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -89,7 +88,7 @@
 
 <div id="root"></div>
 
-<script type='text/babel'>
+<script type='text/javascript'>
   const { useState, useEffect, useRef, createRoot } = React
   const Progress = styled.div`
     position:  fixed;
@@ -202,208 +201,446 @@
       });
     };
 
-        return (
-          <div>
-            <Progress scroll={scrollPosition + '%'} />
-            <div className="navbar">
-              <div className="navbar-logo">
-                <img className='logo-image' src='https://m.media-amazon.com/images/S/abs-image-upload-na/5/AmazonStores/A1PA6795UKMFR9/5d119907dc93102ed65366c89fdd1731.w800.h800.png'></img>
-              </div>
-              <div className="navbar-links">
-                <a>Home</a>
-                <a>About</a>
-                <a>News</a>
-                <a>Contact</a>
-              </div>
-            </div>
-            <div className='title-container'>
-              <h1>HTML Ipsum Presents</h1>
-            </div>
-            <div className='content-container'>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus
-                diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus
-                sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. </p>
+    return (
+      React.createElement("div",null,
+        React.createElement(Progress, {scroll: scrollPosition + "%"}),
+        React.createElement("div", {className: "navbar"},
+          React.createElement("div",{className: "navbar-logo"},
+          React.createElement("img", {
+          className: "logo-image",
+          src: "https://m.media-amazon.com/images/S/abs-image-upload-na/5/AmazonStores/A1PA6795UKMFR9/5d119907dc93102ed65366c89fdd1731.w800.h800.png"
+        })),
+        React.createElement("div",{className: "navbar-links"},
+          React.createElement("a", null, "Home"),
+          React.createElement("a", null, "About"),
+          React.createElement("a", null, "News"),
+          React.createElement("a", null, "Contact"))),
 
-              <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. <b>Lorem ipsum dolor sit
-                amet, consectetur adipiscing elit</b>. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur
-                tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem.
-                <b>Vestibulum lacinia arcu eget nulla</b>. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis
-                vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus,
-                ullamcorper vel, tincidunt sed, euismod in, nibh. </p>
+      React.createElement("div",{className: "title-container"},
+        React.createElement("h1", null, "HTML Ipsum Presents")),
 
-              <p>Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                himenaeos. Nam nec ante. <i>Curabitur tortor</i>. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing
-                diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus
-                consequat imperdiet. <b>Fusce ac turpis quis ligula lacinia aliquet</b>. Vestibulum sapien. <i>In scelerisque sem at
-                  dolor</i>. Proin quam. Etiam ultrices. <b>Nam nec ante</b>. Suspendisse in justo eu magna luctus suscipit. Sed
-                lectus. </p>
-
-              <p>Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum
-                magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi
-                lacinia molestie dui. Praesent blandit dolor. <i>Morbi lectus risus, iaculis vel, suscipit quis, luctus non,
-                  massa</i>. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis
-                laoreet. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut
-                ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi.
-                Integer lacinia sollicitudin massa. </p>
-
-              <p>Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. <b>Curabitur sit amet mauris</b>. Quisque nisl
-                felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante. Nulla quam.
-                Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan
-                porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. </p>
-
-              <p><i>Sed non quam</i>. Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis
-                at, neque. Nullam mauris orci, aliquet et, iaculis et, viverra vitae, ligula. Nulla ut felis in purus aliquam
-                imperdiet. Maecenas aliquet mollis lectus. Vivamus consectetuer risus et tortor. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Integer nec odio. Praesent libero. <b>Vestibulum nisi lectus, commodo ac, facilisis ac,
-                  ultricies eu, pede</b>. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis
-                sagittis ipsum. </p>
-
-              <p>Praesent mauris. <b>Integer nec odio</b>. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia
-                arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. <i>Integer nec odio</i>.
-                Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. <b>Fusce nec tellus sed augue semper
-                  porta</b>. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. </p>
-
-              <p><i>Duis sagittis ipsum</i>. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis
-                ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque
-                volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante
-                quis turpis. Nulla facilisi. Ut fringilla. <b>Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa</b>.
-                Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. </p>
-
-              <p>Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer
-                euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna
-                augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi
-                lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. </p>
-
-              <p>Morbi in ipsum sit amet pede facilisis laoreet. <i>Class aptent taciti sociosqu ad litora torquent per conubia
-                nostra, per inceptos himenaeos</i>. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum
-                tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar
-                ullamcorper. Nulla facilisi. <b>Praesent blandit dolor</b>. Integer lacinia sollicitudin massa. <b>Praesent blandit
-                  dolor</b>. Cras metus. Sed aliquet risus a tortor. Integer id quam. </p>
-
-              <p>Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. <i>Suspendisse in justo eu
-                magna luctus suscipit</i>. Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi lectus,
-                commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo.
-                Sed pretium blandit orci. Ut eu diam at pede suscipit sodales. <b>Proin sodales libero eget ante</b>. Aenean lectus
-                elit, fermentum non, convallis id, sagittis at, neque. Nullam mauris orci, aliquet et, iaculis et, viverra vitae,
-                ligula. </p>
-
-              <p>Nulla ut felis in purus aliquam imperdiet. Maecenas aliquet mollis lectus. Vivamus consectetuer risus et tortor.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus
-                diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus
-                sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. </p>
-
-              <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. <b>Praesent libero</b>.
-                Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. <b>Duis sagittis ipsum</b>. Curabitur tortor.
-                Pellentesque nibh. <i>Praesent libero</i>. Aenean quam. In scelerisque sem at dolor. <b>Duis sagittis ipsum</b>.
-                Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus,
-                iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla
-                metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. </p>
-
-              <p>Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante
-                quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet.
-                Vestibulum sapien. Proin quam. Etiam ultrices. </p>
-
-              <p>Suspendisse in justo eu magna luctus suscipit. Sed lectus. <b>Ut fringilla</b>. Integer euismod lacus luctus magna.
-                Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum
-                ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent
-                blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. <i>Suspendisse potenti</i>. Morbi in ipsum
-                sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt
-                malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. </p>
-
-              <p><b>Integer euismod lacus luctus magna</b>. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. Integer
-                lacinia sollicitudin massa. <i>Vestibulum sapien</i>. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi
-                mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante.
-                <i>Morbi in ipsum sit amet pede facilisis laoreet</i>. Nulla quam. Aenean laoreet. </p>
-              <div className="header-container">
-                <h2>Header Level 2</h2>
-              </div>
-              <p><b>Integer lacinia sollicitudin massa</b>. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut
-                orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. <b>Integer id quam</b>. Sed pretium blandit orci.
-                Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. Nullam
-                mauris orci, aliquet et, iaculis et, viverra vitae, ligula. Nulla ut felis in purus aliquam imperdiet. Maecenas
-                aliquet mollis lectus. Vivamus consectetuer risus et tortor. <b>Vestibulum nisi lectus, commodo ac, facilisis ac,
-                  ultricies eu, pede</b>. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. </p>
-
-              <p>Praesent libero. <b>Sed pretium blandit orci</b>. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh
-                elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. <b>Lorem ipsum
-                  dolor sit amet, consectetur adipiscing elit</b>. Mauris massa. <b>Sed cursus ante dapibus diam</b>. Vestibulum
-                lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. </p>
-
-              <p>Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis
-                tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus
-                non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt
-                sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per
-                conubia nostra, per inceptos himenaeos. </p>
-
-              <p>Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis.
-                Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. <i>Sed dignissim
-                  lacinia nunc</i>. Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit.
-                Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem,
-                at interdum magna augue eget diam. </p>
-
-              <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui.
-                Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede
-                facilisis laoreet. <b>Suspendisse in justo eu magna luctus suscipit</b>. Donec lacus nunc, viverra nec, blandit vel,
-                egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris.
-                Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. Integer lacinia sollicitudin massa. Cras metus. </p>
-
-              <p>Sed aliquet risus a tortor. <b>Donec lacus nunc, viverra nec, blandit vel, egestas et, augue</b>. Integer id quam.
-                Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. <b>Morbi in dui quis est
-                  pulvinar ullamcorper</b>. Proin sodales libero eget ante. Nulla quam. <i>Vestibulum ante ipsum primis in
-                    faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui</i>. Aenean laoreet.
-                Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus
-                quis, aliquet eget, justo. Sed pretium blandit orci. Ut eu diam at pede suscipit sodales. Aenean lectus elit,
-                fermentum non, convallis id, sagittis at, neque. </p>
-
-              <p>Nullam mauris orci, aliquet et, iaculis et, viverra vitae, ligula. Nulla ut felis in purus aliquam imperdiet.
-                Maecenas aliquet mollis lectus. Vivamus consectetuer risus et tortor. <i>Vestibulum tincidunt malesuada tellus</i>.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. <b>Ut eu diam at pede
-                  suscipit sodales</b>. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis
-                sagittis ipsum. Praesent mauris. </p>
-
-              <p>Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti
-                sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed
-                dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas
-                mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel,
-                suscipit quis, luctus non, massa. </p>
-
-              <p>Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. <i>Mauris massa</i>. Nulla metus metus, ullamcorper vel,
-                tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent
-                per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque
-                adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. <b>Morbi lectus risus, iaculis vel, suscipit quis,
-                  luctus non, massa</b>. Ut fringilla. Suspendisse potenti. <i>Maecenas mattis</i>. Nunc feugiat mi a tellus
-                consequat imperdiet. </p>
-
-              <p>Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer
-                euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna
-                augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi
-                lacinia molestie dui. Praesent blandit dolor. Sed non quam. <b>Nunc feugiat mi a tellus consequat imperdiet</b>. In
-                vel mi sit amet augue congue elementum. <i>Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh</i>.
-                Morbi in ipsum sit amet pede facilisis laoreet. </p>
-
-              <p>Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. <b>Quisque cursus, metus vitae pharetra auctor, sem
-                massa mattis sem, at interdum magna augue eget diam</b>. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices
-                enim. <b>Suspendisse in justo eu magna luctus suscipit</b>. Curabitur sit amet mauris. <i>Nulla metus metus,
-                  ullamcorper vel, tincidunt sed, euismod in, nibh</i>. Morbi in dui quis est pulvinar ullamcorper. Nulla
-                facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi.
-                Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. </p>
-            </div>
-
-            <div className="reading-time">
-              {(startTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>Start Time: {startTime.start_time}</p></li></ul>)}
-              {(endTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>End Time: {endTime.end_time}</p></li></ul>)}
-              {(totalTime == null) ? (<ul><li><p>Loading...</p></li></ul>) : (<ul><li><p>Total Time: {totalTime.total_time}</p></li></ul>)}
-            </div>
-          </div>
+      React.createElement("div",{className: "content-container"},
+        React.createElement(
+          "p",
+          null,
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. "
+          ),
+        React.createElement(
+          "p",
+          null,
+          "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. ",
+        React.createElement("b",
+          null,"Lorem ipsum dolor sit amet, consectetur adipiscing elit"),". Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem.",
+        React.createElement("b",
+          null,"Vestibulum lacinia arcu eget nulla"),". Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. "),
+        React.createElement("p",
+          null,"Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. ",
+        React.createElement("i",
+          null, "Curabitur tortor"),". Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. ",
+        React.createElement("b",
+          null, "Fusce ac turpis quis ligula lacinia aliquet"),
+        ". Vestibulum sapien. ",
+        React.createElement(
+          "i",
+          null,
+          "In scelerisque sem at dolor"
+        ),
+        ". Proin quam. Etiam ultrices. ",
+        React.createElement("b", null, "Nam nec ante"),
+        ". Suspendisse in justo eu magna luctus suscipit. Sed lectus. "
+      ),
+        React.createElement(
+        "p",
+        null,
+        "Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. ",
+        React.createElement(
+          "i",
+          null,
+          "Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa"
+        ),
+        ". Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. Integer lacinia sollicitudin massa. "
+      ),
+        React.createElement(
+        "p",
+        null,
+        "Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. ",
+        React.createElement("b", null, "Curabitur sit amet mauris"),
+        ". Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. "
+      ),
+      React.createElement(
+        "p",
+        null,
+      React.createElement("i", null, "Sed non quam"),
+        ". Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. Nullam mauris orci, aliquet et, iaculis et, viverra vitae, ligula. Nulla ut felis in purus aliquam imperdiet. Maecenas aliquet mollis lectus. Vivamus consectetuer risus et tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. ",
+      React.createElement(
+          "b",
+          null,
+          "Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede"
+        ),
+        ". Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Praesent mauris. ",
+        React.createElement("b", null, "Integer nec odio"),
+        ". Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. ",
+        React.createElement("i", null, "Integer nec odio"),
+        ". Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. ",
+        React.createElement(
+          "b",
+          null,
+          "Fusce nec tellus sed augue semper porta"
+        ),
+        ". Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        React.createElement("i", null, "Duis sagittis ipsum"),
+        ". Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. ",
+        React.createElement(
+          "b",
+          null,
+          "Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa"
+        ),
+        ". Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Morbi in ipsum sit amet pede facilisis laoreet. ",
+        React.createElement(
+          "i",
+          null,
+          "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos"
+        ),
+        ". Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. ",
+        React.createElement("b", null, "Praesent blandit dolor"),
+        ". Integer lacinia sollicitudin massa. ",
+        React.createElement("b", null, "Praesent blandit dolor"),
+        ". Cras metus. Sed aliquet risus a tortor. Integer id quam. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. ",
+        React.createElement(
+          "i",
+          null,
+          "Suspendisse in justo eu magna luctus suscipit"
+        ),
+        ". Proin sodales libero eget ante. Nulla quam. Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. Ut eu diam at pede suscipit sodales. ",
+        React.createElement(
+          "b",
+          null,
+          "Proin sodales libero eget ante"
+        ),
+        ". Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. Nullam mauris orci, aliquet et, iaculis et, viverra vitae, ligula. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Nulla ut felis in purus aliquam imperdiet. Maecenas aliquet mollis lectus. Vivamus consectetuer risus et tortor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. ",
+        React.createElement("b", null, "Praesent libero"),
+        ". Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. ",
+        React.createElement("b", null, "Duis sagittis ipsum"),
+        ". Curabitur tortor. Pellentesque nibh. ",
+        React.createElement("i", null, "Praesent libero"),
+        ". Aenean quam. In scelerisque sem at dolor. ",
+        React.createElement("b", null, "Duis sagittis ipsum"),
+        ". Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. Vestibulum sapien. Proin quam. Etiam ultrices. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Suspendisse in justo eu magna luctus suscipit. Sed lectus. ",
+        React.createElement("b", null, "Ut fringilla"),
+        ". Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. ",
+        React.createElement("i", null, "Suspendisse potenti"),
+        ". Morbi in ipsum sit amet pede facilisis laoreet. Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        React.createElement(
+          "b",
+          null,
+          "Integer euismod lacus luctus magna"
+        ),
+        ". Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. Integer lacinia sollicitudin massa. ",
+        React.createElement("i", null, "Vestibulum sapien"),
+        ". Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. Proin sodales libero eget ante.",
+        React.createElement(
+          "i",
+          null,
+          "Morbi in ipsum sit amet pede facilisis laoreet"
+        ),
+        ". Nulla quam. Aenean laoreet. "
+      ),
+      React.createElement(
+        "div",
+        {
+          className: "header-container"
+        },
+        React.createElement("h2", null, "Header Level 2")
+      ),
+      React.createElement(
+        "p",
+        null,
+        React.createElement(
+          "b",
+          null,
+          "Integer lacinia sollicitudin massa"
+        ),
+        ". Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. ",
+        React.createElement("b", null, "Integer id quam"),
+        ". Sed pretium blandit orci. Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. Nullam mauris orci, aliquet et, iaculis et, viverra vitae, ligula. Nulla ut felis in purus aliquam imperdiet. Maecenas aliquet mollis lectus. Vivamus consectetuer risus et tortor. ",
+        React.createElement(
+          "b",
+          null,
+          "Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede"
+        ),
+        ". Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Praesent libero. ",
+        React.createElement("b", null, "Sed pretium blandit orci"),
+        ". Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. Fusce nec tellus sed augue semper porta. ",
+        React.createElement(
+          "b",
+          null,
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+        ),
+        ". Mauris massa. ",
+        React.createElement(
+          "b",
+          null,
+          "Sed cursus ante dapibus diam"
+        ),
+        ". Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. Ut fringilla. Suspendisse potenti. Nunc feugiat mi a tellus consequat imperdiet. ",
+        React.createElement(
+          "i",
+          null,
+          "Sed dignissim lacinia nunc"
+        ),
+        ". Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. In vel mi sit amet augue congue elementum. Morbi in ipsum sit amet pede facilisis laoreet. ",
+        React.createElement(
+          "b",
+          null,
+          "Suspendisse in justo eu magna luctus suscipit"
+        ),
+        ". Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. Curabitur sit amet mauris. Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. Integer lacinia sollicitudin massa. Cras metus. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Sed aliquet risus a tortor. ",
+        React.createElement(
+          "b",
+          null,
+          "Donec lacus nunc, viverra nec, blandit vel, egestas et, augue"
+        ),
+        ". Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. ",
+        React.createElement(
+          "b",
+          null,
+          "Morbi in dui quis est pulvinar ullamcorper"
+        ),
+        ". Proin sodales libero eget ante. Nulla quam. ",
+        React.createElement(
+          "i",
+          null,
+          "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui"
+        ),
+        ". Aenean laoreet. Vestibulum nisi lectus, commodo ac, facilisis ac, ultricies eu, pede. Ut orci risus, accumsan porttitor, cursus quis, aliquet eget, justo. Sed pretium blandit orci. Ut eu diam at pede suscipit sodales. Aenean lectus elit, fermentum non, convallis id, sagittis at, neque. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Nullam mauris orci, aliquet et, iaculis et, viverra vitae, ligula. Nulla ut felis in purus aliquam imperdiet. Maecenas aliquet mollis lectus. Vivamus consectetuer risus et tortor. ",
+        React.createElement(
+          "i",
+          null,
+          "Vestibulum tincidunt malesuada tellus"
+        ),
+        ". Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. ",
+        React.createElement(
+          "b",
+          null,
+          "Ut eu diam at pede suscipit sodales"
+        ),
+        ". Sed cursus ante dapibus diam. Sed nisi. Nulla quis sem at nibh elementum imperdiet. Duis sagittis ipsum. Praesent mauris. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Fusce nec tellus sed augue semper porta. Mauris massa. Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur sodales ligula in libero. Sed dignissim lacinia nunc. Curabitur tortor. Pellentesque nibh. Aenean quam. In scelerisque sem at dolor. Maecenas mattis. Sed convallis tristique sem. Proin ut ligula vel nunc egestas porttitor. Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Fusce ac turpis quis ligula lacinia aliquet. Mauris ipsum. ",
+        React.createElement("i", null, "Mauris massa"),
+        ". Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh. Quisque volutpat condimentum velit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam nec ante. Sed lacinia, urna non tincidunt mattis, tortor neque adipiscing diam, a cursus ipsum ante quis turpis. Nulla facilisi. ",
+        React.createElement(
+          "b",
+          null,
+          "Morbi lectus risus, iaculis vel, suscipit quis, luctus non, massa"
+        ),
+        ". Ut fringilla. Suspendisse potenti. ",
+        React.createElement("i", null, "Maecenas mattis"),
+        ". Nunc feugiat mi a tellus consequat imperdiet. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Vestibulum sapien. Proin quam. Etiam ultrices. Suspendisse in justo eu magna luctus suscipit. Sed lectus. Integer euismod lacus luctus magna. Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lacinia molestie dui. Praesent blandit dolor. Sed non quam. ",
+        React.createElement(
+          "b",
+          null,
+          "Nunc feugiat mi a tellus consequat imperdiet"
+        ),
+        ". In vel mi sit amet augue congue elementum. ",
+        React.createElement(
+          "i",
+          null,
+          "Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh"
+        ),
+        ". Morbi in ipsum sit amet pede facilisis laoreet. "
+      ),
+      React.createElement(
+        "p",
+        null,
+        "Donec lacus nunc, viverra nec, blandit vel, egestas et, augue. ",
+        React.createElement(
+          "b",
+          null,
+          "Quisque cursus, metus vitae pharetra auctor, sem massa mattis sem, at interdum magna augue eget diam"
+        ),
+        ". Vestibulum tincidunt malesuada tellus. Ut ultrices ultrices enim. ",
+        React.createElement(
+          "b",
+          null,
+          "Suspendisse in justo eu magna luctus suscipit"
+        ),
+        ". Curabitur sit amet mauris. ",
+        React.createElement(
+          "i",
+          null,
+          "Nulla metus metus, ullamcorper vel, tincidunt sed, euismod in, nibh"
+        ),
+        ". Morbi in dui quis est pulvinar ullamcorper. Nulla facilisi. Integer lacinia sollicitudin massa. Cras metus. Sed aliquet risus a tortor. Integer id quam. Morbi mi. Quisque nisl felis, venenatis tristique, dignissim in, ultrices sit amet, augue. "
+      )
+    ),
+      React.createElement("div",{className: "reading-time"},
+      startTime == null ? React.createElement("ul",null,
+            React.createElement(
+            "li",
+            null,
+              React.createElement("p", null, "Loading...")
+          )
         )
-      }
-
-      const rootElement = document.getElementById('root')
-      ReactDOM.render(<App />, rootElement)
+        : React.createElement(
+          "ul",
+          null,
+            React.createElement(
+            "li",
+            null,
+              React.createElement(
+              "p",
+              null,
+              "Start Time: ",
+              startTime.start_time
+            )
+          )
+        ),
+      endTime == null
+        ?  React.createElement(
+          "ul",
+          null,
+            React.createElement(
+            "li",
+            null,
+              React.createElement("p", null, "Loading...")
+          )
+        )
+        : React.createElement(
+          "ul",
+          null,
+            React.createElement(
+            "li",
+            null,
+              React.createElement(
+              "p",
+              null,
+              "End Time: ",
+              endTime.end_time
+            )
+          )
+        ),
+      totalTime == null
+        ? React.createElement(
+          "ul",
+          null,
+            React.createElement(
+            "li",
+            null,
+              React.createElement("p", null, "Loading...")
+          )
+        )
+        : React.createElement(
+          "ul",
+          null,
+            React.createElement(
+            "li",
+            null,
+              React.createElement(
+              "p",
+              null,
+              "Total Time: ",
+              totalTime.total_time
+            )
+          )
+        )
+      )
+    )
+  );
+}
+      const root = ReactDOM.createRoot(document.getElementById('root'))
+      root.render(React.createElement(App, null));
 
 </script>
 </body>
